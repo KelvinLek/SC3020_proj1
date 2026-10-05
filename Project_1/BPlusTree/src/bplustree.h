@@ -204,6 +204,11 @@ public:
     // Save header to block 0.
     void saveHeader();
 
+    // Task 3: remove the greatest entry and rebalance the rightmost path.
+    // Specialized for deleting a suffix (all keys > a threshold).
+    // The expected key/address is checked before changing anything.
+    void eraseLargest(float expectedKey, const RecordId& expectedRid);
+
     // Used by bulk loading once the root and levels are known.
     void setTreeInfo(BlockId rootNode,
                      std::uint32_t numLevels,
