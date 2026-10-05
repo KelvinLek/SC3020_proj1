@@ -1,0 +1,28 @@
+=== Task 1: storage component ===
+Loaded 26651 records from ../games.txt into data.db
+
+Design
+  Record                                   23 B fixed length: 1 B header + 22 B of fields, no padding
+  Block                                    4096 B = 8 B header + 177 x 23 B slots + 17 B unused (unspanned)
+  Database file                            block 0 = file header, blocks 1..151 = data blocks (contiguous), 622592 B total
+  Record order                             same order as games.txt (heap file)
+
+Statistics
+  Size of a record                         23 bytes
+  Number of records                        26651
+  Number of records stored in a block      177
+  Number of blocks for storing the data    151
+  Records with missing values              99
+  (a plain C++ struct would be 28 B -> 146 records/block)
+
+Verification: reopened data.db, read 151 data blocks, 26651 records
+  26651 / 26651 records identical to games.txt -> OK
+
+Data block 1: header {block id=1, slots used=177, live=177}
+  slot   0  22/12/2022  team=1610612740  pts=126  fg%=0.484  ft%=0.926  fg3%=0.382  ast=25  reb=46  win=1
+  slot   1  22/12/2022  team=1610612762  pts=120  fg%=0.488  ft%=0.952  fg3%=0.457  ast=16  reb=40  win=1
+  slot   2  21/12/2022  team=1610612739  pts=114  fg%=0.482  ft%=0.786  fg3%=0.313  ast=22  reb=37  win=1
+  slot   3  21/12/2022  team=1610612755  pts=113  fg%=0.441  ft%=0.909  fg3%=0.297  ast=27  reb=49  win=1
+  slot   4  21/12/2022  team=1610612737  pts=108  fg%=0.429  ft%=1.000  fg3%=0.378  ast=22  reb=47  win=0
+  ... 172 more slots
+  bytes of slot 0 (23 B): 00 96 2d 04 00 00 60 7e d9 ce f7 3e 56 0e 6d 3f 81 95 c3 3e 19 2e 01
