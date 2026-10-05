@@ -1,0 +1,7 @@
+# Build outputs: rebuilt from source by each member's install steps.
+*.exe
+*.o
+Storage/task1
+BPlusTree/task2
+BPlusTree/bplustree
+BPlusTree/index.db

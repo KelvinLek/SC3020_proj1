@@ -204,6 +204,18 @@ public:
     // Save header to block 0.
     void saveHeader();
 
+    // Used by bulk loading once the root and levels are known.
+    void setTreeInfo(BlockId rootNode,
+                     std::uint32_t numLevels,
+                     std::uint32_t numKeys,
+                     BlockId firstLeaf) {
+        header_.rootNode = rootNode;
+        header_.numLevels = numLevels;
+        header_.numKeys = numKeys;
+        header_.firstLeaf = firstLeaf;
+        saveHeader();
+    }
+
     private:
 
     storage::Disk indexDisk_;
